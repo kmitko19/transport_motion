@@ -21,10 +21,9 @@
 def add_ligth
   # проверка статуса игры
   if @flag_game == true 
-    puts "----------------------------------------- \
-        \nYou can't add traffic ligth, \
-        \nbecause the traffic is already activated! \
-        \n-----------------------------------------"
+    puts "Message of game"
+    puts "You can't add traffic ligth, \
+        \nbecause the traffic is already activated!"
     return
   end
   # проверка наличия дорог: этот блок понадобится для развития игры,
@@ -61,6 +60,7 @@ def add_ligth
   while true    
     input = ""
     until input == "Y" or input == "y" or input == "N" or input == "n"
+      puts "Query of game"
       print "Add Traffic light? (Y/N): "
       input = gets.chomp  # проверка запроса на продолжение создания светофора
     end
@@ -73,33 +73,28 @@ def add_ligth
       arr = @ligth_list[@ligth_list.size - 1]
       min_length = arr.loc_ligth
     end 
-
-    print "---------------------------------------------- \
-       \nSet distance from start of route (km) \
+    puts "Query of game"
+    print "Set distance from start of route (km) \
        \nValid value from #{min_length} to #{@route_length}: "
     input = gets.chomp.to_i  
     
     if input <= 0 # проверка на положительное значение
-    puts "---------------------------------------------- \
-        \nInvalid value '#{input}' \
-        \n----------------------------------------------"    
+    puts "Message of game"
+    puts "Invalid value '#{input}'"    
     elsif input > @route_length # проверка на max
-      puts "---------------------------------------------- \
-          \nDistance cann't be more then '#{@route_length} km' \          
-          \n----------------------------------------------"
+      puts "Message of game"
+      puts "Distance cann't be more then '#{@route_length} km'"
     elsif input <= min_length # проверка на min
-      puts "---------------------------------------------- \
-          \nDistance cann't be less then '#{min_length}' \          
-          \n----------------------------------------------"
+      puts "Message of game"
+      puts "Distance cann't be less then '#{min_length}'"
     else      
       id_ligth = "ligth_" + "#{@ligth_list.size + 1}"      
       @ligth_list.push(instance_eval "@#{id_ligth} = Traffic_Ligth.new(id_ligth)")
       @ligth_list[@ligth_list.size - 1].loc_ligth = input
       @ligth_list[@ligth_list.size - 1].id_route = id_route
-      puts "---------------------------------------------- \
-          \nSet Traffic light #{id_ligth} \
-          \nDistance from route start is #{input} km\
-          \n----------------------------------------------"    
+      puts "Query of game"
+      puts "Set Traffic light #{id_ligth} \
+          \nDistance from route start is #{input} km"    
     end    
   end  
 end
@@ -107,19 +102,8 @@ end
 # Показать светофоры и их состояние
 def show_ligths
   if @ligth_list.size == 0
-    puts "---------------------------------------------- \
-         \nTraffic lights don't exist!"
-    input = ""
-    until input == "Y" or input == "y" or input == "N" or input == "n"
-      print "Add Traffic light? (Y/N): "
-      input = gets.chomp 
-    end
-    unless input  == "Y" or input  == "y"
-      return
-    end 
-    add_ligth
-  end  
-  if @ligth_list.size == 0
+    puts "Message of game"
+    puts "Traffic lights don't exist!"
     return
   end
   puts "Current state of Traffic ligths on the route \
@@ -135,8 +119,8 @@ end
 # Изменить параметры светофора
 def change_ligths
   if @ligth_list.size == 0
-    puts "---------------------------------------------- \
-         \nTraffic lights don't exist!"
+    puts "Message of game"
+    puts "Traffic lights don't exist!"
     input = ""
     until input == "Y" or input == "y" or input == "N" or input == "n"
       print "Add Traffic light? (Y/N): "
@@ -160,9 +144,11 @@ def change_ligths
     instance_eval "@#{arr.id_ligth}.show_ligth" 
   }
   puts "---------------------------------------------------------"
+  puts "Query of game"
   print "Enter id of ligth (from 1 to #{@ligth_list.size}): "
   input = gets.chomp.to_i  
   if input < 1 || input > @ligth_list.size
+    puts "Message of game"
     puts "Invalid value '#{input}'"
     return false
   end
@@ -190,22 +176,27 @@ class Traffic_Ligth
 
   # Изменить параметры светофора
   def change_ligth
+    puts "Query of game"
     puts "Current duration of green is #{@t_green}"
     print "Enter new duration from 1 to 60: "
     input = gets.chomp.to_i
     if input <= 0 || input > 60
+      puts "Message of game"
       puts "Invalid value '#{input}'"
     else
       @t_green = input
     end
+    puts "Query of game"
     puts "Current duration of red is #{@t_red}"
     print "Enter new duration from 1 to 60: "
     input = gets.chomp.to_i
     if input <= 0 || input > 60
+      puts "Message of game"
       puts "Invalid value '#{input}'"
     else
       @t_red = input
     end
+    puts "Query of game"
     puts "Current color is #{@color_ligth}"
     input = ""
     until input == "Y" or input == "y" or input == "N" or input == "n"
@@ -215,6 +206,7 @@ class Traffic_Ligth
     if input  == "Y" or input  == "y"
       @color_ligth == "green" ? @color_ligth = "red" : @color_ligth = "green"
     end 
+    puts "Query of game"
     puts "Current state is #{@state_ligth}"
     input = ""
     until input == "Y" or input == "y" or input == "N" or input == "n"
@@ -224,6 +216,7 @@ class Traffic_Ligth
     if input  == "Y" or input  == "y"
       @state_ligth == true ? @state_ligth = false : @state_ligth = true
     end
+    puts "Message of game"
     puts "New state of Traffic ligth on the route \
         \n--------------------------------------------------------- \
         \n|  Name\t\t| Dist\t|T_Green| T_Red | Color | State |\
