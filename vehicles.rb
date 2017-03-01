@@ -23,10 +23,9 @@
 def add_veh
   # проверка статуса игры
   if @flag_game == true 
-    puts "----------------------------------------- \
-        \nYou can't add traffic ligth, \
-        \nbecause the traffic is already activated! \
-        \n-----------------------------------------"
+    puts "Message of game"
+    puts "You can't add traffic ligth, \
+        \nbecause the traffic is already activated!"
     return
   end
   # проверка наличия дорог: этот блок понадобится для развития игры,
@@ -61,31 +60,35 @@ def add_veh
   while true    
     input = ""
     until input == "Y" or input == "y" or input == "N" or input == "n"
+      puts "Query of game"
       print "Add Vehicle? (Y/N): "
       input = gets.chomp  # проверка запроса на продолжение создания светофора
     end
     unless input  == "Y" or input  == "y"
       return
     end    
+    puts "Query of game"
     print "Enter type of vehicle: "
     input = gets.chomp
     if input == ""
+      puts "Query of game"
       puts "You not entered type!"      
     else
       type = input
+      puts "Query of game"
       print "Enter speed of vehicle: "
       input = gets.chomp
       input = input.to_i
       if input <= 0 || input > 200
+        puts "Message of game"
         puts "Invalid value '#{input}'"        
       else
         speed = input
         # создание нового экземпляра транспортного средства    
         @vehicle_list.push(instance_eval "@#{type} = Vehicle.new(type, speed)")
         @vehicle_list[@vehicle_list.size - 1].id_route = id_route
-        puts "---------------------------------------------- \
-              \nNew vehicle '#{type}'. Speed: '#{speed}' km \
-              \n----------------------------------------------"
+        puts "Info of game"
+        puts "New vehicle '#{type}'. Speed: '#{speed}' km"
       end 
       
     end    
@@ -95,11 +98,11 @@ end
 # Изменить параметры транспортного средства
 def change_veh
   if @vehicle_list.size == 0
-    puts "--------------------- \
-        \nVehicles don't exist! \
-        \n---------------------"
+    puts "Message of game"
+    puts "Vehicles don't exist!"
     input = ""
     until input == "Y" or input == "y" or input == "N" or input == "n"
+      puts "Query of game"
       print "Add vehicle? (Y/N): "
       input = gets.chomp 
     end
@@ -121,17 +124,18 @@ def change_veh
   print "| #{i}. "
   instance_eval "@#{arr.type}.show_veh"
   }
-  puts "-------------------------------------------------"
+  puts "Query of game"
   print "Enter id of vehicle (from 1 to #{@vehicle_list.size}): "
   input = gets.chomp  
   input = input.to_i  
   if input < 1 || input > @vehicle_list.size
+    puts "Message of game"
     puts "Invalid value '#{input}'"
     return false
   end
 
   while true
-    puts "------------------------ \
+    puts "Control options^ \
        \n'S' - speed \
        \n'M' - state of motion \
        \n'T' - technical state \
@@ -154,20 +158,8 @@ end
 # Показать транспортные средства и их состояние
 def show_vehs
   if @vehicle_list.size == 0
-    puts "--------------------- \
-        \nVehicles don't exist! \
-        \n---------------------"
-    input = ""
-    until input == "Y" or input == "y" or input == "N" or input == "n"
-      print "Add vehicle? (Y/N): "
-      input = gets.chomp 
-    end
-    unless input  == "Y" or input  == "y"
-      return
-    end 
-    add_veh
-  end  
-  if @vehicle_list.size == 0
+    puts "Message of game"
+    puts "Vehicles don't exist!"    
     return
   end
   puts "Current state of vehicles on the route \
@@ -190,32 +182,30 @@ class Vehicle
     @id_route = 0         # номер маршрута     
   end
 
-  attr_accessor :speed, :move_state, :tech_state, :type, :id_route
+  attr_accessor :speed, :move_state, :tech_state, :type, :id_route, :last_loc
  
 # Метод изменения скорости транспортного средства  
   def change_speed    
-    puts "-------------------------------------------- \
-        \nType: #{@type}   Current speed: #{@speed} \
-        \n--------------------------------------------"
+    puts "Query of game"
+    puts "Type: #{@type}   Current speed: #{@speed}"
     print "Enter new speed of vehicle (from 1 to 200): "    
     input = gets.chomp
     input = input.to_i
     if input <= 0 || input > 200
+      puts "Message of game"
       puts "Invalid value '#{input}'"
       return
     else
       @speed = input
-      puts "-------------------------------------------- \
-          \nType: #{@type}   New speed: #{@speed} \
-          \n--------------------------------------------"
+      puts "Info of game"
+      puts "Type: #{@type}   New speed: #{@speed}"
     end
   end
 
 # Метод изменения статуса движения транспортного средства  
   def change_move    
-    puts "-------------------------------------------- \
-        \nType: #{@type}   Current state: #{@move_state} \
-        \n--------------------------------------------"
+    puts "Query of game"
+    puts "Type: #{@type}   Current state: #{@move_state}"
     input = ""
     until input == "Y" or input == "y" or input == "N" or input == "n"
       print "To change the state? (Y/N): "
@@ -223,17 +213,15 @@ class Vehicle
     end
     if input  == "Y" or input  == "y"      
       @move_state == "stand" ? @move_state = "moves" : @move_state = "stand"
-      puts "-------------------------------------------- \
-          \nType: #{@type}   New state: #{@move_state} \
-          \n--------------------------------------------" 
+      puts "Ihfo of game"
+      puts "Type: #{@type}   New state: #{@move_state}" 
     end
   end
 
 # Метод изменения технического состояния транспортного средства  
   def change_tech    
-    puts "-------------------------------------------- \
-        \nType: #{@type}   Current state: #{@tech_state} \
-        \n--------------------------------------------"
+    puts "Query of game"
+    puts "Type: #{@type}   Current state: #{@tech_state}"
     input = ""
     until input == "Y" or input == "y" or input == "N" or input == "n"
       print "To change the state? (Y/N): "
@@ -241,9 +229,8 @@ class Vehicle
     end
     if input  == "Y" or input  == "y"      
       @tech_state == true ? @tech_state = false : @tech_state = true
-      puts "-------------------------------------------- \
-          \nType: #{@type}   New state: #{@tech_state} \
-          \n--------------------------------------------" 
+      puts "Info of game"
+      puts "Type: #{@type}   New state: #{@tech_state}" 
     end
   end
 
@@ -252,30 +239,8 @@ class Vehicle
   end
 
   def show_loc
-    puts "-------------------------------------------- \
-        \nType: #{@type}   Current location: #{} \
-        \n--------------------------------------------"
-  end
-end
-
-#*********************************************************************************************
-
-# 4.  Метод: Общее состояние дорожного движения на заданный момент времени от начала движения
-def monitor
-  if @ligth_list.size == 0
-    puts "--------------------------------------------------- \
-         \nTraffic lights do not exist \
-         \n---------------------------------------------------"
-  else
-    puts "Current state of Traffic ligths on the route \
-        \n--------------------------------------------------------- \
-        \n|  Name\t\t| Dist\t|T_Green| T_Red | Color | State |\
-        \n---------------------------------------------------------"     
-    i=0
-    @ligth_list.each {|item| arr = item; i +=1; 
-    puts "| Ligth#{i}\t|  #{arr[0]}\t|   #{arr[1]}\t|   #{arr[2]}\t| #{arr[3]}\t| #{arr[4]}\t| \
-        \n---------------------------------------------------------"
-    }    
+    puts "Info of game"
+    puts "Type: #{@type}   Current location: #{}"
   end
 end
 
