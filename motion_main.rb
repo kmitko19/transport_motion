@@ -13,15 +13,18 @@
 
 # Переменные экземпляра класса Class
 @flag_game = false # флаг состояния игры
+@last_time = 0 # последнее время мониторинга движения
 
 require_relative 'route.rb'
 require_relative 'ligths.rb'
 require_relative 'vehicles.rb'
+require_relative 'monitor.rb'
+
 # I. Общий алгоритм выполнения программы
 def motion
 # 1. Вход в программу
-#       Приветствие запрос имени: если "", то выход (6.)
-#       Предложение поиграть: N, то выход (6.)
+#       Приветствие запрос имени: если "", то выход
+#       Предложение поиграть: N, то выход
   print "Hi! What's your name? "
   player = gets.chomp
   if player == ""
