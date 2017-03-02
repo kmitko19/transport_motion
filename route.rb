@@ -19,7 +19,8 @@ def change_route
         \nbecause traffic ligths were installed!"
     return
   end
-  @road.change_length
+  @road.change_length  
+  @route_length = @road.route_length
 end
 
 class Route
@@ -51,6 +52,4 @@ class Route
     end    
   end
 end
-@road = Route.new
-@route_list.push(@road)
-@route_length = @road.route_length
+
