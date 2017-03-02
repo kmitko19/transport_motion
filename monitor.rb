@@ -7,23 +7,23 @@ def monitor
   @ligth_m = []
   # проверка наличия транспортных средств на дороге
   if @flag_game == false
-    puts "Message of game"
+    puts "!"
     puts "The game is not activated"
     return
   else
     
   end
   if @vehicle_list.size == 0
-    puts "Message of game"
+    puts "!"
     puts "Vehicles don't exist!"    
     return
   end 
   # ввод интервала от времени последнего мониторинга
-  puts "Query of game"
+  puts ">"
   print "Enter time from last monitoring (min):"
   input = gets.chomp.to_i
   if input <= 0
-    puts "Message of game"
+    puts "!"
     puts "Invalid value '#{input}'"
     return
   else
