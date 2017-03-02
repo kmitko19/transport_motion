@@ -11,20 +11,26 @@
 # Объекты движения: Автомобиль, Трамвай, Велосипед
 # Регулировка движения: Светофор
 
-# Переменные экземпляра класса Class
-@flag_game = false # флаг состояния игры
-@last_time = 0 # последнее время мониторинга движения
-@route_list = [] # массив маршрутов  
-@route_length = 0 # длина маршрута
-@ligth_list = []  # Массив светофоров
-@vehicle_list = [] # массив транспортных средств
-require_relative 'route.rb'
-require_relative 'ligths.rb'
-require_relative 'vehicles.rb'
-require_relative 'monitor.rb'
 
 # I. Общий алгоритм выполнения программы
 def motion
+
+	# Переменные экземпляра класса Class
+	@flag_game = false # флаг состояния игры
+	@last_time = 0 # последнее время мониторинга движения
+	@route_list = [] # массив маршрутов  
+	@route_length = 0 # длина маршрута
+	@ligth_list = []  # Массив светофоров
+	@vehicle_list = [] # массив транспортных средств
+
+	require_relative 'route.rb'
+	require_relative 'ligths.rb'
+	require_relative 'vehicles.rb'
+	require_relative 'monitor.rb'
+
+	@road = Route.new
+	@route_list.push(@road)
+
 # 1. Вход в программу
 #       Приветствие запрос имени: если "", то выход
 #       Предложение поиграть: N, то выход
@@ -47,15 +53,7 @@ def motion
 # 2. Задание исходных данных:
 #     - длина дороги (км)
   # requiry_relative 'router.rb'
-  puts "There is route 'Road', which length #{@route_length} km"
-  input = ""
-  until input == "Y" or input == "y" or input == "N" or input == "n"
-    print "Change length? (Y/N): "
-    input = gets.chomp 
-  end
-  if input  == "Y" or input  == "y"      
-    change_route
-  end
+  change_route
 #     - расстановка светофоров (км от начала дороги), задание длительности сигналов (мин)
 #       и исходное состояние
   add_ligth
@@ -85,7 +83,7 @@ def motion
   show_vehs
   help_game
   while true    
-    print "Enter control command: (help -'H')"
+    print "Enter control command (help -'H'): "
     symb = gets.chomp
     case symb
       when "H"
@@ -113,10 +111,6 @@ def motion
         monitor
       when "Q"
         puts "Game is over! Good luck!"
-        @flag_game = false
-        @route_list = [] # массив маршрутов		
-		@ligth_list = []  # Массив светофоров
-		@vehicle_list = [] # массив транспортных средств
         return
     end
   end
