@@ -67,11 +67,13 @@ def monitor
     distance = speed_min * duration
     veh_loc = @vehicle_list[i].last_loc + distance
     veh_loc = veh_loc.round
-    @vehicle_list[i].last_loc = veh_loc
     if veh_loc > @route_length
-      veh_loc = @route_length    
-    end    
-    @veh_m[veh_loc][i] = @vehicle_list[i].type    
+      veh_loc = @route_length
+      puts "!"
+      puts "Vehicle '#{@vehicle_list[i].type}' completed the route"      
+    end
+    @vehicle_list[i].last_loc = veh_loc    
+    @veh_m[veh_loc - 1][i] = @vehicle_list[i].type    
     i += 1
   }
   
