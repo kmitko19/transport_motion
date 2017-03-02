@@ -113,6 +113,10 @@ def motion
         monitor
       when "Q"
         puts "Game is over! Good luck!"
+        @flag_game = false
+        @route_list = [] # массив маршрутов		
+		@ligth_list = []  # Массив светофоров
+		@vehicle_list = [] # массив транспортных средств
         return
     end
   end
