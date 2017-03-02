@@ -52,8 +52,8 @@ def add_ligth
   end
   @route_length = @route_list [input - 1].route_length
   id_route = input
-=end
   @route_length = @route_list [0].route_length
+=end  
   id_route = 1
   while true    
     input = ""
