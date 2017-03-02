@@ -132,12 +132,12 @@ def change_veh
   end
 
   while true
-    puts "Control options^ \
+    puts "Control options \
        \n'S' - speed \
        \n'M' - state of motion \
        \n'T' - technical state \
        \n'Q' - quit"
-    print "Enter id of option:"
+    print "Enter option:"
     symb = gets.chomp    
     case symb
       when "s" || "S"
