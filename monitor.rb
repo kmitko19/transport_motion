@@ -9,6 +9,7 @@ def monitor
   if @flag_game == false
     puts "Message of game"
     puts "The game is not activated"
+    return
   else
     
   end
@@ -21,12 +22,13 @@ def monitor
   puts "Query of game"
   print "Enter time from last monitoring (min):"
   input = gets.chomp.to_i
-  if input <= 0 || input <= @last_time
+  if input <= 0
     puts "Message of game"
     puts "Invalid value '#{input}'"
     return
   else
     duration = input  # Интервал
+    @last_time = @last_time + input
   end
   # формирование временного пустого массива для заполнения массива
   # размещения транспорта на дороге
@@ -65,6 +67,7 @@ def monitor
     distance = speed_min * duration
     veh_loc = @vehicle_list[i].last_loc + distance
     veh_loc = veh_loc.round
+    @vehicle_list[i].last_loc = veh_loc
     if veh_loc > @route_length
       veh_loc = @route_length    
     end    
