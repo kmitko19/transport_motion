@@ -1,10 +1,17 @@
 # 4.  Метод: Общее состояние дорожного движения на заданный
 # момент времени от начала движения
-@route_m = []
-@veh_m = []
-@ligth_m = []
+
 def monitor
+  @route_m = []
+  @veh_m = []
+  @ligth_m = []
   # проверка наличия транспортных средств на дороге
+  if @flag_game == false
+    puts "Message of game"
+    puts "The game is not activated"
+  else
+    
+  end
   if @vehicle_list.size == 0
     puts "Message of game"
     puts "Vehicles don't exist!"    
