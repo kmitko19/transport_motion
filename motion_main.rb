@@ -14,7 +14,10 @@
 # Переменные экземпляра класса Class
 @flag_game = false # флаг состояния игры
 @last_time = 0 # последнее время мониторинга движения
-
+@route_list = [] # массив маршрутов  
+@route_length = 0 # длина маршрута
+@ligth_list = []  # Массив светофоров
+@vehicle_list = [] # массив транспортных средств
 require_relative 'route.rb'
 require_relative 'ligths.rb'
 require_relative 'vehicles.rb'
@@ -114,6 +117,7 @@ def motion
     end
   end
 end
+
 # Метод вызова помощи
 def help_game
   puts "------------------------------------\
